@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "Kora Messenger",
+    "slug": "kora-messenger",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/kora-icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/kora-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B1120"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kora.messenger"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/kora-icon.png",
+        "backgroundColor": "#0B1120"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.kora.messenger",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.VIBRATE",
+        "android.permission.USE_BIOMETRIC"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-video",
+      "expo-web-browser",
+      "expo-localization",
+      "expo-audio",
+      "expo-camera",
+      "expo-image-picker",
+      "expo-document-picker",
+      "expo-file-system",
+      "expo-media-library",
+      "expo-haptics",
+      "expo-secure-store",
+      "expo-notifications"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": ""
+      }
+    }
+  }
+}

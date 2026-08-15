@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+server/node_modules/
+
+# Expo
+frontend/.expo/
+frontend/dist/
+frontend/web-build/
+
+# Environment
+.env
+server/.env
+frontend/.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+*.apk
+*.aab
+*.ipa
+android/
+ios/
+
+# Uploads (runtime generated)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+
+# Old project reference (local only)
+old_project_ref/
