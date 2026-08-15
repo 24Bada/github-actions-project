@@ -22,8 +22,19 @@ function buildTheme(scheme) {
     typography,
     spacing,
     layout,
-    // Convenience aliases
+    // Convenience aliases (spread palette first)
     ...palette,
+
+    // Component-friendly aliases
+    bubbleMine: palette.bubbleOut,
+    bubbleOther: palette.bubbleIn,
+    bubbleMineText: palette.bubbleOutText,
+    bubbleOtherText: palette.bubbleInText,
+    primarySoft: palette.primaryLight,
+    inputBackground: palette.surfaceAlt,
+    official: palette.badgeOfficial,
+    premium: palette.badgePremium,
+    business: palette.badgeBusiness,
   };
 }
 

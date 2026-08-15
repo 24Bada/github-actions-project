@@ -3,7 +3,7 @@
  *
  * Navigation structure:
  * - Auth flow: Welcome → Login → Register → VerifyOtp → ForgotPassword → ResetPassword
- * - Main flow: Home (tabs: Chats, Status, Channels, Calls) → Chat → Settings → etc.
+ * - Main flow: Home → Chat → Settings → EditProfile → Account → QRCode → etc.
  */
 
 import React, { useContext } from "react";
@@ -21,6 +21,11 @@ import RegisterScreen from "../screens/auth/RegisterScreen";
 
 // Main screens
 import HomeScreen from "../screens/HomeScreen";
+import ChatScreen from "../screens/ChatScreen";
+import SettingsScreen from "../screens/SettingsScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
+import AccountScreen from "../screens/AccountScreen";
+import QRCodeScreen from "../screens/QRCodeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +36,7 @@ function AuthStack() {
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
-      {/* More auth screens will be added: VerifyOtp, ForgotPassword, ResetPassword */}
+      {/* VerifyOtp, ForgotPassword, ResetPassword will be added */}
     </Stack.Navigator>
   );
 }
@@ -39,13 +44,14 @@ function AuthStack() {
 // Main app stack
 function MainStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ title: "Kora", headerShown: false }}
-      />
-      {/* More screens will be added: Chat, Settings, Status, Channels, etc. */}
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Chat" component={ChatScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+      <Stack.Screen name="Account" component={AccountScreen} />
+      <Stack.Screen name="QRCode" component={QRCodeScreen} />
+      {/* More screens will be added: Status, Channels, Premium, etc. */}
     </Stack.Navigator>
   );
 }
@@ -55,7 +61,6 @@ export default function AppNavigator() {
   const { theme } = useThemeContext();
 
   if (loading) {
-    // Splash/loading state
     return null; // Can add a splash screen here
   }
 
