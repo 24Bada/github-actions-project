@@ -45,17 +45,27 @@ jobs:
 
       - name: 🔨 Build APK with Gradle
         working-directory: frontend/android
-        run: ./gradlew assembleRelease --no-daemon -x lint
+        run: ./gradlew assembleRelease --no-daemon -x lint --stacktrace
+
+      - name: 📝 Rename APK
+        run: |
+          APK_DIR="frontend/android/app/build/outputs/apk/release"
+          mkdir -p /tmp/apk-out
+          cp "$APK_DIR"/*.apk /tmp/apk-out/kora-messenger-v1.0.0-arm64.apk
+          echo "APK_SIZE=$(du -h /tmp/apk-out/*.apk | cut -f1)" >> $GITHUB_ENV
 
       - name: 📤 Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: kora-messenger-apk
-          path: frontend/android/app/build/outputs/apk/release/*.apk
+          name: kora-messenger-arm64
+          path: /tmp/apk-out/*.apk
           retention-days: 30
 
       - name: ✅ Report success
         run: |
           echo "## APK Build Complete ✅" >> $GITHUB_STEP_SUMMARY
           echo "Download the APK from the Artifacts section of this workflow run." >> $GITHUB_STEP_SUMMARY
-          echo "Build commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**File:** \`kora-messenger-v1.0.0-arm64.apk\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Size:** ${{ env.APK_SIZE }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Architecture:** arm64-v8a (Samsung Galaxy Note 20)" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
