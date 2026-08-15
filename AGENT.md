@@ -36,7 +36,7 @@ Any AI continuing this project MUST read this file first.
 | 4 | Local server (Express) | ✅ DONE |
 | 5 | Database models (MongoDB) | ✅ DONE |
 | 6 | Authentication (register/login/OTP) | ✅ DONE |
-| 7 | Profiles | 🔶 PENDING |
+| 7 | Profiles | ✅ DONE |
 | 8 | Messaging (core) | 🚧 IN PROGRESS |
 | 9 | Media (camera/gallery/documents) | 🔶 PENDING |
 | 10 | Voice messages & audio | 🔶 PENDING |
@@ -57,7 +57,7 @@ Any AI continuing this project MUST read this file first.
 
 ### 2026-08-15 17:46 WAT — Initial Project Scaffold
 
-**SHA:** (initial commit)
+**SHA:** fc69a42
 **Phase:** 1-6 (setup through auth architecture)
 **Status:** ✅ DONE
 
@@ -111,31 +111,68 @@ Any AI continuing this project MUST read this file first.
 - All env vars centralized in server/config/index.js and frontend/config/config.js
 - MongoDB connection string defaults to local: mongodb://127.0.0.1:27017/kora_messenger
 
-**Old project reference notes:**
-- Kora color scheme was blue (#2563EB) primary, violet (#7C3AED) secondary — preserved this identity
-- Had Kora AI avatar, Kora Support avatar, premium/official badges — to be migrated as assets
-- Had camera components (KoraCameraView, KoraGalleryStrip, etc.) — architecture to reference for Phase 9
-- Had voice translation preview screen — architecture to reference for Phase 10-11
-- Had chat components (MessageBubble, ChatInput, AttachmentSheet, VoiceRecorder) — to reference for Phase 8
+---
+
+### 2026-08-15 18:03 WAT — Phase 7-8 Profiles + Messaging + GitHub Actions Build
+
+**SHA:** eb3a0d7
+**Phase:** 7 (Profiles) + 8 (Messaging core) + CI/CD
+**Status:** Phase 7 ✅ DONE, Phase 8 🚧 IN PROGRESS
+
+**What was done:**
+
+**Phase 7 — Profiles (✅ DONE):**
+- `screens/SettingsScreen.js` — Search, profile section, category list (premium, account, chats, privacy, appearance, notifications, storage, language, help, invite)
+- `screens/EditProfileScreen.js` — Avatar with camera button, name/about/username rows with navigation to edit sub-screens
+- `screens/AccountScreen.js` — Email/phone/Kora ID info card, security notifications, two-step verification, change number, account info request, delete account, logout
+- `screens/QRCodeScreen.js` — QR code display (placeholder), Kora ID, copy to clipboard, share link
+
+**Phase 8 — Messaging (🚧 IN PROGRESS):**
+- `screens/ChatScreen.js` — Full chat experience with Socket.IO real-time, AsyncStorage message persistence, keyboard avoiding view, voice recording state
+- `components/chat/ChatHeader.js` — Avatar, online status, official/premium badges, video/call/menu actions
+- `components/chat/MessageBubble.js` — Text, image, voice, video, document, location message types with time and read receipts
+- `components/chat/MessageList.js` — FlatList with date separators, auto-scroll, inverted list
+- `components/chat/ChatInput.js` — Text input, emoji, attachments, camera, mic/send toggle, press-and-hold to record
+- `components/chat/AttachmentSheet.js` — Bottom sheet with document, gallery, camera, audio, location, contact, video options
+- `components/chat/RecordingBar.js` — Recording timer, cancel, send, slide-to-cancel hint
+
+**Infrastructure:**
+- `theme/index.js` — Added component-friendly aliases (bubbleMine, bubbleOther, primarySoft, inputBackground, official, premium, business)
+- `navigation/AppNavigator.js` — Wired all new screens (Chat, Settings, EditProfile, Account, QRCode)
+- `frontend/assets/` — Placeholder app icon and favicon
+- `frontend/eas.json` — EAS build config (preview=APK, production=AAB)
+- `.github/workflows/build-android.yml` — GitHub Actions workflow for automatic APK builds
+
+**What's deferred:**
+- Voice recording uses expo-audio (will be connected in Phase 10)
+- Camera/gallery/document attachments show "coming soon" (Phase 9)
+- QR code is a placeholder icon (needs react-native-qrcode-svg)
+- Call/video call buttons show "coming soon"
+- Edit sub-screens (EditName, EditAbout, EditUsername) not yet created
+
+**CI/CD:**
+- GitHub Actions workflow triggers on push to main
+- Uses ubuntu-latest with Node 20, Java 17, Android SDK
+- Runs `expo prebuild` then `gradlew assembleRelease`
+- Uploads APK as artifact (30-day retention)
 
 ---
 
 ## Next Steps (Roadmap for Continuing AI)
 
-1. **Phase 7 — Profiles**: Create EditProfileScreen, SettingsScreen, AccountScreen, QRCodeScreen
-2. **Phase 8 — Messaging**: Create ChatScreen with real-time messaging, MessageBubble, ChatInput, message persistence
-3. **Phase 9 — Media**: Create camera, gallery, document picker, media preview screens
-4. **Phase 10 — Voice**: Voice recording UI with expo-audio, playback, recording bar
-5. **Phase 11 — Translation**: Translation API architecture (no fake translations)
-6. **Phase 12 — Status**: Status creation, viewing, privacy controls
-7. **Phase 13 — Channels**: Channel creation, posting, following, admin management
-8. **Phase 14 — Kora AI**: AI assistant account and chat
-9. **Phase 15 — Premium**: Premium UI, plan display, subscription architecture (no fake payments)
-10. **Phase 16 — Business**: Business profiles, catalog, advertising architecture
-11. **Phase 17 — Privacy/Security**: App lock, privacy settings, blocking
-12. **Phase 18 — Legal pages**: Terms, Privacy, Guidelines, Help (clickable with placeholder content)
-13. **Phase 19 — Testing**: Test all features
-14. **Phase 20 — Production build**: EAS build configuration
+1. **Phase 8 remaining**: Create EditName, EditAbout, EditUsername sub-screens
+2. **Phase 9 — Media**: Create camera, gallery, document picker, media preview screens
+3. **Phase 10 — Voice**: Voice recording UI with expo-audio, playback, recording bar
+4. **Phase 11 — Translation**: Translation API architecture (no fake translations)
+5. **Phase 12 — Status**: Status creation, viewing, privacy controls
+6. **Phase 13 — Channels**: Channel creation, posting, following, admin management
+7. **Phase 14 — Kora AI**: AI assistant account and chat
+8. **Phase 15 — Premium**: Premium UI, plan display, subscription architecture (no fake payments)
+9. **Phase 16 — Business**: Business profiles, catalog, advertising architecture
+10. **Phase 17 — Privacy/Security**: App lock, privacy settings, blocking
+11. **Phase 18 — Legal pages**: Terms, Privacy, Guidelines, Help (clickable with placeholder content)
+12. **Phase 19 — Testing**: Test all features
+13. **Phase 20 — Production build**: EAS build configuration
 
 **IMPORTANT**: The old project zip is in `incoming_files/65879d32b_KoraMessengerMobile-AI.zip`. Any AI continuing should extract and reference it for component architecture, but NOT inherit its broken configuration.
 
@@ -143,4 +180,14 @@ Any AI continuing this project MUST read this file first.
 
 ## Problems & Fixes Log
 
-(Empty — no issues encountered yet during initial scaffold)
+### 2026-08-15 18:03 WAT — GitHub Actions APK Build
+**SHA:** eb3a0d7
+**Status:** 🔶 PENDING (build in progress)
+- Workflow created at `.github/workflows/build-android.yml`
+- Build triggered automatically on push
+- APK will be available as GitHub Actions artifact
+- Check: https://github.com/24Bada/kora-messenger/actions
+
+---
+
+*Last updated: 2026-08-15 18:03 WAT | Commit: eb3a0d7 | By: Koda (AI)*
