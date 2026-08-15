@@ -41,15 +41,12 @@
     "plugins": [
       "expo-font",
       "expo-video",
-      "expo-web-browser",
-      "expo-localization",
       "expo-audio",
       "expo-camera",
       "expo-image-picker",
       "expo-document-picker",
       "expo-file-system",
       "expo-media-library",
-      "expo-haptics",
       "expo-secure-store",
       "expo-notifications"
     ],
